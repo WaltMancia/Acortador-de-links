@@ -89,6 +89,23 @@ json {   "status": "OK" }
 
 ---
 
+## 🔐 Seguridad implementada
+
+- Validación de URL en frontend y backend
+- Sanitización básica de inputs
+- Manejo controlado de errores
+
+---
+
+## ⚙️ Buenas prácticas aplicadas
+
+- Uso de variables de entorno (.env)
+- Separación frontend/backend
+- Manejo de estados (loading, error)
+- Mejora de experiencia de usuario (loader)
+
+---
+
 ## 📈 Future Improvements
 
 - Add database (MongoDB / PostgreSQL)

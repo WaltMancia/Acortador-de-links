@@ -1,21 +1,19 @@
 const express = require('express');
+const cors = require('cors');
 const crypto = require('crypto');
 
 const app = express();
 const PORT = 3000;
 
-// Middleware
+app.use(cors());
 app.use(express.json());
 
-// "Base de datos" en memoria
 const urlDatabase = {};
 
-// Generar código corto
 function generateShortCode() {
-    return crypto.randomBytes(3).toString('hex'); // ej: a1b2c3
+    return crypto.randomBytes(3).toString('hex');
 }
 
-// Validar URL básica
 function isValidUrl(url) {
     try {
         new URL(url);
@@ -25,7 +23,6 @@ function isValidUrl(url) {
     }
 }
 
-// Endpoint para acortar URL
 app.post('/shorten', (req, res) => {
     const { url } = req.body;
 
@@ -34,15 +31,13 @@ app.post('/shorten', (req, res) => {
     }
 
     const shortCode = generateShortCode();
-
     urlDatabase[shortCode] = url;
 
     res.json({
-        shortUrl: `http://localhost:${PORT}/${shortCode}`
+        shortUrl: `http://localhost:${PORT}/${shortCode}`,
     });
 });
 
-// Redirección
 app.get('/:code', (req, res) => {
     const { code } = req.params;
 
@@ -55,7 +50,6 @@ app.get('/:code', (req, res) => {
     res.redirect(originalUrl);
 });
 
-// Health check (pro)
 app.get('/health', (req, res) => {
     res.json({ status: 'OK' });
 });
